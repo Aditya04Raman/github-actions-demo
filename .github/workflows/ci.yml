@@ -1,34 +1,13 @@
-name: CI
+name: TWS CI WORKFLOW
 
 on:
     push:
-        branches: [main]
-    pull_request:
-        branches: [main]
-
 jobs:
-    backend:
-        name: Build and Test Backend
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: backend
-
+    build: #job name
+        runs-on: ubuntu-latest #OS
         steps:
-            - name: Checkout code
-                uses: actions/checkout@v4
-
-            - name: Set up Go
-                uses: actions/setup-go@v5
-                with:
-                    go-version-file: backend/go.mod
-
-            - name: Download dependencies
-                run: go mod download
-
-            - name: Build
-                run: go build ./...
-
-            - name: Test
-                run: go test ./...
+            - name:Checkout Code
+                uses: actions/checkout@v4 # clone the code into ubuntu runner
+            - name: Setup Docker
+                uses: docker/setup-buildx-action@v4 # setup docker in ubuntu runner
         
